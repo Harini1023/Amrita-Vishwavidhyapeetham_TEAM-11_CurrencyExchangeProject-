@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - youtube.com/codingnepal -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Currency Converter App in JavaScript | CodingNepal</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="charts.js">
+    <link rel="stylesheet" href="animation.js">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- FontAweome CDN Link for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    
+  </head>
+  <body>
+
+    <div class="wrapper">
+      <header>Currency Converter</header>
+      <form action="#">
+        <div class="amount">
+          <p>Enter Amount</p>
+          <input type="text" value="1">
+        </div><br>
+        <div style="width: 47% ; float: left">
+            <label for="From-date">From-Date</label>
+            <input type="date" id="from" name="from-date">  
+        </div>
+        <div style="margin-left: 53%">
+            <label for="To-date">To-Date</label>
+            <input type="date" id="To" name="To-date">  
+        </div>
+        <div class="drop-list">
+          <div class="from">
+            <p>From</p>
+            <div class="select-box">
+              <img src="https://flagcdn.com/48x36/us.png" alt="flag">
+              <select> <!-- Options tag are inserted from JavaScript --> </select>
+            </div>
+          </div>
+          <div class="icon"><i class="fas fa-exchange-alt"></i></div>
+          <div class="to">
+            <p>To</p>
+            <div class="select-box">
+              <img src="https://flagcdn.com/48x36/in.png" alt="flag">
+              <select> <!-- Options tag are inserted from JavaScript --> </select>
+            </div>
+          </div>
+        </div>
+        <br><br>
+        <div class="dropdown">
+            <h2> Show Stats By </h2>  
+            <select id ="myList" onchange = "stats()" >  
+            <option id ="weekly"> Weekly </option> 
+            <option id="monthly"> Monthly </option>  
+            <option id ="Quarterly"> Quarterly </option>   
+            <option id ="yearly"> Yearly </option>   
+            </select>  
+        </div>
+           
+        <div class="exchange-rate">81.48</div>
+        <button>Get Exchange Rate</button>
+      </form>
+    </div>
+
+    <div class="chartBox">
+      <canvas id="myChart"></canvas>
+    </div>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+ <script>
+
+// const data = [];
+// const data2 = [];
+// let prev = 100;
+// let prev2 = 5;
+// for (let i = 0; i < 2000; i++) {
+//   prev += 5 - Math.random() * 10;
+//   data.push({x: i, y: prev});
+//   prev2 += 5 - Math.random() * 10;
+//   data2.push({x: i, y: prev2});
+// }
+
+
+// const totalDuration = 10000;
+// const delayBetweenPoints = totalDuration / data.length;
+// const previousY = (ctx) => ctx.index === 0 ? ctx.chart.scales.y.getPixelForValue(100) : ctx.chart.getDatasetMeta(ctx.datasetIndex).data[ctx.index - 1].getProps(['y'], true).y; 
+
+
+const ctx = document.getElementById('myChart').getContext('2d');
+const myChart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    datasets: [{
+      borderColor: '#fff',
+      borderWidth: 1,
+      radius: 0,
+      data: data,
+    },
+    ]
+  },
+  options: {
+    animation:{
+      x: {
+    type: '',
+    easing: 'linear',
+    duration: delayBetweenPoints,
+    from: NaN, // the point is initially skipped
+    delay(ctx) {
+      if (ctx.type !== 'data' || ctx.xStarted) {
+        return 0;
+      }
+      ctx.xStarted = true;
+      return ctx.index * delayBetweenPoints;
+    }
+  },
+  y: {
+    type: 'number',
+    easing: 'linear',
+    duration: delayBetweenPoints,
+    from: previousY,
+    delay(ctx) {
+      if (ctx.type !== 'data' || ctx.yStarted) {
+        return 0;
+      }
+      ctx.yStarted = true;
+      return ctx.index * delayBetweenPoints;
+    }
+  }
+    },
+    interaction: {
+      intersect: false
+    },
+    plugins: {
+      legend: false
+    },
+    scales: {
+      x: {
+        type: 'linear'
+      }
+    }
+  }
+});
+
+
+</script>
+   
+
+    <!-- <script src="js/country-list.js"></script>
+    <script src="js/script.js"></script> -->
+
+  </body>
+</html>
